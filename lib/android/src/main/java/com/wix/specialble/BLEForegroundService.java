@@ -181,7 +181,7 @@ public class BLEForegroundService extends Service {
             int resId = 0;
             if (config.getSmallNotificationIconPath() != null && config.getSmallNotificationIconPath().length() > 0) {
                 try {
-                    resId = getResources().getIdentifier(config.getSmallNotificationIconPath(), "drawable", "com.rncontacttracing.demo");
+                    resId = getResources().getIdentifier(config.getSmallNotificationIconPath(), "drawable", "org.vicomtech.rapid");
                 } catch (Throwable throwable) {
                     throwable.printStackTrace();
                 }
