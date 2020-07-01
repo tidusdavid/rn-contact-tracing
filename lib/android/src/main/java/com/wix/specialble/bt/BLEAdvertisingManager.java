@@ -16,6 +16,7 @@ import com.wix.specialble.db.DBClient;
 import com.wix.specialble.listeners.IEventListener;
 import com.wix.specialble.sensor.SensorUtils;
 import com.wix.specialble.util.Constants;
+import java.nio.charset.Charset;
 import java.util.UUID;
 
 public class BLEAdvertisingManager {
@@ -78,7 +79,7 @@ public class BLEAdvertisingManager {
         }
     }
 
-    public void startAdvertise(String serviceUUID) {
+    public void startAdvertise(String serviceUUID, String publicKey) {
         if(bluetoothAdapter.isEnabled()) {
 
             if(advertiser == null)
@@ -92,11 +93,7 @@ public class BLEAdvertisingManager {
             dataBuilder.addServiceUuid(pUuid);
             dataBuilder.setIncludeDeviceName(false);
             dataBuilder.setIncludeTxPowerLevel(true);
-
-            int currentTime = (int) (System.currentTimeMillis() / 1000);
-            byte[] key = CryptoManager.getInstance(mContext).mySelf.generateEphemeralId(currentTime, BLEScannerManager.sGeoHash);
-
-            dataBuilder.addServiceData(pUuid, key);
+            dataBuilder.addServiceData(pUuid, publicKey.getBytes(Charset.forName("UTF-8")));
 
             AdvertiseSettings.Builder settingsBuilder = new AdvertiseSettings.Builder();
             settingsBuilder.setAdvertiseMode(config.getAdvertiseMode());

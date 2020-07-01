@@ -70,7 +70,7 @@ public class BLEManager implements IEventListener {
 
     public void advertise()
     {
-        bleAdvertiser.startAdvertise(mConfig.getServiceUUID());
+        bleAdvertiser.startAdvertise(mConfig.getServiceUUID(), mConfig.getToken());
     }
 
     public void stopAdvertise() {
